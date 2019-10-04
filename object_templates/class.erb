@@ -1,5 +1,7 @@
 <% app_name = name.gsub('psick::', '').gsub('::tp', '') -%>
-# <%= name %>
+# DEPRECATION NOTICE: This profile has been deprecated.
+# It will be removed on version 1.0.0 of psick module.
+# Use equivalent class tp_profile::<%= app_name %> in the tp_profile module as replacement
 #
 # @summary This psick profile manages <%= app_name %> with Tiny Puppet (tp)
 #
@@ -77,6 +79,9 @@ class <%= name %> (
 ) {
 
   if $manage {
+    notify { 'Deprecated profile <%= name %>':
+      message => 'This profile has been deprecated. It will be removed on version 1.0.0 of psick module. Use equivalent class tp_profile::<%= app_name %> in the tp_profile     module as replacement',
+    }
     if !$::psick::noop_mode and $no_noop {
       info('Forced no-noop mode in <%= name %>')
       noop(false)
